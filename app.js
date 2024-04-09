@@ -45,8 +45,17 @@ const mineGrid = (arr) => {
         //NOTE - an array is constructed with elements representing the content of adjecent cells,
         //we are going to use checkAccess for each of the eight possible position adjacent position.
         return [
-
-        ]
+            checkAccess(y+1, x),    //checks the cell directly below the current
+            checkAccess(y+1,x+1),   //checks the cell diagonally below and to the right of the current cell
+            checkAccess(y+1, x-1),  //checks the cell diagonally below and to the left of the current cell
+            checkAccess(y, x+1),    //checks the cell directly to the right of current cell.
+            checkAccess(y, x-1),    //checks the cell directly to the left of current cell.
+            checkAccess(y-1, x),    //checks the cell directly above current cell.
+            checkAccess(y-1,x+1),   //checks the cell diagonally above and to the right of the current cell.
+            checkAccess(y-1,x-1),   //checks the cell digonally above and to the left of the current cell.
+            //NOTE - construct an array of values that represent the contents of the cells adjacents, after the constructing of the arraywe will use filter method to keep only thsoe elements that are mines ('$').
+        ].filter(adjCell => adjCell === "$").length.toString()
     }
+    return arr.map((r,y) => r.map((c,x) => c === "-" ? getMine(getMine(x,y) : c)))
 
 }
